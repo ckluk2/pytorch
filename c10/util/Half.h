@@ -10,7 +10,6 @@
 /// intrinsics directly on the Half type from device code.
 
 #include <c10/macros/Macros.h>
-#include <c10/util/C++17.h>
 #include <c10/util/TypeSafeSignMath.h>
 #include <c10/util/complex.h>
 #include <c10/util/floating_point_utils.h>

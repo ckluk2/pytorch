@@ -18,7 +18,6 @@
 
 #pragma once
 
-#include <c10/util/C++17.h>
 #include <algorithm>
 #include <cmath>
 #include <cstddef>

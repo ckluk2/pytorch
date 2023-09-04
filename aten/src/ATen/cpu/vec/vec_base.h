@@ -27,7 +27,6 @@
 #include <ATen/cpu/vec/intrinsics.h>
 #include <ATen/native/Math.h>
 #include <ATen/NumericUtils.h>
-#include <c10/util/C++17.h>
 #include <c10/util/Half.h>
 #include <c10/util/BFloat16.h>
 #include <c10/util/BFloat16-math.h>

@@ -6,7 +6,6 @@
  */
 
 #include <ATen/core/function_schema.h>
-#include <c10/util/C++17.h>
 #include <c10/util/Metaprogramming.h>
 #include <type_traits>
 
