@@ -1,6 +1,5 @@
 #pragma once
 
-#include <c10/util/C++17.h>
 #include <c10/util/TypeTraits.h>
 #include <algorithm>
 #include <type_traits>
@@ -499,9 +498,8 @@ struct map_types_to_values final {
 template <class... Types>
 struct map_types_to_values<typelist<Types...>> final {
   template <class Func>
-  static std::tuple<c10::invoke_result_t<Func, type_<Types>>...> call(
-      Func&& func) {
-    return std::tuple<c10::invoke_result_t<Func, type_<Types>>...>{
+  static auto call(Func&& func) {
+    return std::tuple<std::invoke_result_t<Func, type_<Types>>...>{
         std::forward<Func>(func)(type_<Types>())...};
   }
 };
