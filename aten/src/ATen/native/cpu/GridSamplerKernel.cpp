@@ -7,7 +7,6 @@
 #include <ATen/TensorGeometry.h>
 #include <ATen/TensorIterator.h>
 #include <ATen/cpu/vec/vec.h>
-#include <c10/util/C++17.h>
 #include <c10/util/irange.h>
 
 #include <algorithm>

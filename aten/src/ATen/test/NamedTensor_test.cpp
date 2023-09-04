@@ -4,7 +4,6 @@
 #include <ATen/NamedTensorUtils.h>
 #include <ATen/TensorNames.h>
 #include <c10/util/Exception.h>
-#include <c10/util/C++17.h>
 #include <c10/util/irange.h>
 
 using at::Dimname;
