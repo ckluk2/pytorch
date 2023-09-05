@@ -6,7 +6,6 @@
 #include <cstdlib>
 #include <functional>
 #include <memory>
-#include <sstream>
 #include <string>
 #include <type_traits>
 #include <utility>
@@ -114,22 +113,6 @@ CUDA_HOST_DEVICE constexpr decltype(auto) apply(F&& f, Tuple&& t) {
 #endif
 
 #undef CUDA_HOST_DEVICE
-
-template <typename Functor, typename... Args>
-typename std::enable_if<
-    std::is_member_pointer<typename std::decay<Functor>::type>::value,
-    typename std::invoke_result_t<Functor, Args...>>::type
-invoke(Functor&& f, Args&&... args) {
-  return std::mem_fn(std::forward<Functor>(f))(std::forward<Args>(args)...);
-}
-
-template <typename Functor, typename... Args>
-typename std::enable_if<
-    !std::is_member_pointer<typename std::decay<Functor>::type>::value,
-    typename std::invoke_result_t<Functor, Args...>>::type
-invoke(Functor&& f, Args&&... args) {
-  return std::forward<Functor>(f)(std::forward<Args>(args)...);
-}
 
 namespace detail {
 struct _identity final {

@@ -10,9 +10,9 @@
 #include <c10/util/Metaprogramming.h>
 #include <c10/util/TypeList.h>
 #include <c10/util/TypeTraits.h>
+#include <functional>
 #include <torch/custom_class_detail.h>
 #include <torch/library.h>
-#include <iostream>
 #include <sstream>
 
 namespace torch {
@@ -118,7 +118,7 @@ class class_ : public ::torch::detail::class_base {
                                    c10::tagged_capsule<CurClass> self,
                                    ParameterTypes... arg) {
       c10::intrusive_ptr<CurClass> classObj =
-          at::guts::invoke(func, std::forward<ParameterTypes>(arg)...);
+          std::invoke(func, std::forward<ParameterTypes>(arg)...);
       auto object = self.ivalue.toObject();
       object->setSlot(0, c10::IValue::make_capsule(classObj));
     };
@@ -325,7 +325,7 @@ class class_ : public ::torch::detail::class_base {
                                 c10::tagged_capsule<CurClass> self,
                                 SetStateArg&& arg) {
       c10::intrusive_ptr<CurClass> classObj =
-          at::guts::invoke(set_state, std::forward<SetStateArg>(arg));
+          std::invoke(set_state, std::forward<SetStateArg>(arg));
       auto object = self.ivalue.toObject();
       object->setSlot(0, c10::IValue::make_capsule(classObj));
     };
