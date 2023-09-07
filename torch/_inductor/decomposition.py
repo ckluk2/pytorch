@@ -83,12 +83,6 @@ def register_decomposition(ops):
     return decomp.register_decomposition(ops, decompositions)
 
 
-@register_decomposition(aten._unsafe_view.default)
-def _unsafe_view(self, size):
-    # this makes pattern matching easier
-    return self.view(size)
-
-
 # TODO: for now, inductor doesn't handle asserts
 # because the condition is symbool -> tensor in the graph.
 @register_decomposition([aten._assert_async.msg])
