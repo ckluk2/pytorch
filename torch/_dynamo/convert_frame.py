@@ -427,6 +427,8 @@ def _compile(
     compile_id=None,
 ) -> Optional[GuardedCode]:
     from torch.fx.experimental.validator import (
+        bisect,
+        BisectValidationException,
         translation_validation_enabled,
         ValidationException,
     )
@@ -460,11 +462,7 @@ def _compile(
             raise
         except Exception:
             if translation_validation_enabled():
-                fakes = tracer.output.tracked_fakes
-                tracer.output.shape_env.produce_guards(
-                    [a.fake for a in fakes],
-                    [a.source for a in fakes],
-                )
+                bisect(tracer.output.shape_env)
             raise
 
         output = tracer.output
@@ -576,6 +574,7 @@ def _compile(
             ConstraintViolationError,
             GuardOnDataDependentSymNode,
             ValidationException,
+            BisectValidationException,
         ) as e:
             fail_reason = str(e)
             exception_handler(e, code, frame, export=export)
