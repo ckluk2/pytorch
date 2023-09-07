@@ -2103,7 +2103,7 @@ template <
             std::negation<std::is_constructible<IValue, Args>>...>::value,
         std::nullptr_t>>
 inline IValue::IValue(const std::tuple<Args...>& t)
-    : IValue(c10::guts::apply(c10::ivalue::Tuple::create<const Args&...>, t)) {
+    : IValue(std::apply(c10::ivalue::Tuple::create<const Args&...>, t)) {
 }
 
 template <
@@ -2114,7 +2114,7 @@ template <
             std::negation<std::is_constructible<IValue, Args>>...>::value,
         std::nullptr_t>>
 inline IValue::IValue(std::tuple<Args...>&& t)
-    : IValue(c10::guts::apply(c10::ivalue::Tuple::create<Args&&...>, std::move(t))) {
+    : IValue(std::apply(c10::ivalue::Tuple::create<Args&&...>, std::move(t))) {
 }
 
 inline IValue::IValue(c10::intrusive_ptr<ivalue::ConstantString> v)
